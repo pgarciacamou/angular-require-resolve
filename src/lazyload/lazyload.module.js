@@ -14,7 +14,8 @@
 		,$q = $injector.get('$q');
 
 		return function(moduleName){
-			angular.module(moduleName).components = angular.module(moduleName).components || components;
+			var mod = angular.module(moduleName);
+			mod.components = mod.components || components;
 			return {
 				load: function (arr){
 					arr = arr || [];
