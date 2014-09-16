@@ -1,4 +1,4 @@
-angular.module('routeResolve')
+angular.module('mainApp')
 .components.service('loginService', function () {
 	this.loginUser = function (username, password) {
 		console.log(username);

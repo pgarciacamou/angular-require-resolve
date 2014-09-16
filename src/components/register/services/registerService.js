@@ -1,4 +1,4 @@
-angular.module('routeResolve')
+angular.module('mainApp')
 .components.service('registerService', [
     function () {
         this.registerUser = function (username, password, email) {

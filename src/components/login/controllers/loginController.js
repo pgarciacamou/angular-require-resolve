@@ -1,14 +1,7 @@
-
-angular.module('routeResolve')
-.components.controller('loginController', [
-    '$scope',
-    'loginService',
-    function ($scope, loginService) {
-
-        console.log('In login controller');
-        
-        $scope.submitForm = function () {
-            loginService.loginUser($scope.userName, $scope.userPassword);
-        }
-    }
-]);
+angular.module('mainApp').components
+.controller('loginController', ['$scope', 'loginService', function ($scope, loginService) {
+	console.log('In login controller');
+	$scope.submitForm = function () {
+		loginService.loginUser($scope.userName, $scope.userPassword);
+	}
+}]);

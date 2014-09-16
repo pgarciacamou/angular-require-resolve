@@ -1,13 +1,8 @@
 
-angular.module('routeResolve')
-.components.controller('registerController', [
-    '$scope',
-    'registerService',
-    function ($scope, registerService) {
-        console.log('In register controller');
-
-        $scope.submitForm = function () {
-            registerService.registerUser($scope.userName, $scope.userPassword, $scope.email);
-        }
-    }
-]);
+angular.module('mainApp').components
+.controller('registerController', ['$scope','registerService',function ($scope, registerService) {
+	console.log('In register controller');
+	$scope.submitForm = function () {
+		registerService.registerUser($scope.userName, $scope.userPassword, $scope.email);
+	}
+}]);
