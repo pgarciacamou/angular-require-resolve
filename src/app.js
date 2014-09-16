@@ -1,31 +1,27 @@
-angular.module('mockService', ['ngMockE2E']);
-angular.module('routeResolve', ['ngRoute', 'LazyLoad'])
-.config(['$routeProvider', '$controllerProvider', '$provide', 'lazyProvider', function ($routeProvider, $controllerProvider, $provide, lazyProvider) {
+angular.module('mainApp', ['ngRoute', 'LazyLoad'])
+.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProvider) {
 	var $lazy = lazyProvider.$get();
 	$routeProvider
 	.when('/login', {
 		templateUrl: 'components/login/partials/login.html'
-		,resolve: [function (){
-			return $lazy.load([
-				'components/login/controllers/loginController'
-				,'components/login/services/loginService'
-			]);//
-		}]
+		,resolve: {
+			load: function (){
+				return $lazy('mainApp').load([
+					'components/login/controllers/loginController'
+					,'components/login/services/loginService'
+				]);//
+			}
+		}
 	})
 	.when('/register', {
-		templateUrl: 'components/register/partials/register.html',
-		resolve: [function (){
-			return $lazy.load([
-				'components/register/controllers/registerController'
-				,'components/register/services/registerService'
-			]);//
-		}]
+		templateUrl: 'components/register/partials/register.html'
+		,resolve: {
+			load: function (){
+				return $lazy('mainApp').load([
+					'components/register/controllers/registerController'
+					,'components/register/services/registerService'
+				]);//
+			}
+		}
 	});
-
-	angular.module('routeResolve')
-	.components = {
-		controller: $controllerProvider.register,
-		service: $provide.service
-	}
-
 }]);
