@@ -1,0 +1,24 @@
+{
+  "name": "angular-require-resolve",
+  "version": "0.0.0",
+  "homepage": "https://github.com/pgarciacamou/angular-require-resolve",
+  "authors": [
+    "Pablo Garcia <pgarciacamou@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "~1.2.24",
+    "angular-mocks": "~1.2.24",
+    "angularjs": "~1.2.24",
+    "requirejs": "~2.1.15",
+    "bootstrap": "~3.2.0",
+    "jquery": "~2.1.1"
+  }
+}

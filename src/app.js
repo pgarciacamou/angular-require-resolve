@@ -1,65 +1,31 @@
-window.app = angular.module('routeResolve', [
-    'ngRoute'
-]);
+angular.module('mockService', ['ngMockE2E']);
+angular.module('routeResolve', ['ngRoute', 'LazyLoad'])
+.config(['$routeProvider', '$controllerProvider', '$provide', 'lazyProvider', function ($routeProvider, $controllerProvider, $provide, lazyProvider) {
+	var $lazy = lazyProvider.$get();
+	$routeProvider
+	.when('/login', {
+		templateUrl: 'components/login/partials/login.html'
+		,resolve: [function (){
+			return $lazy.load([
+				'components/login/controllers/loginController'
+				,'components/login/services/loginService'
+			]);//
+		}]
+	})
+	.when('/register', {
+		templateUrl: 'components/register/partials/register.html',
+		resolve: [function (){
+			return $lazy.load([
+				'components/register/controllers/registerController'
+				,'components/register/services/registerService'
+			]);//
+		}]
+	});
 
-window.appMock = angular.module('mockService', ['ngMockE2E']);
+	angular.module('routeResolve')
+	.components = {
+		controller: $controllerProvider.register,
+		service: $provide.service
+	}
 
-window.app.config([
-    '$routeProvider',
-    '$controllerProvider',
-    '$compileProvider',
-    '$filterProvider',
-    '$provide',
-    function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
-
-        $routeProvider
-            .when('/login', {
-                templateUrl: 'components/login/partials/login.html',
-                resolve: {
-                    load: ['$q', '$rootScope', function ($q, $rootScope) {
-
-                        var deferred = $q.defer();
-
-                        require ([
-                            'components/login/controllers/loginController',
-                            'components/login/services/loginService'
-                        ], function () {
-
-                           $rootScope.$apply(function () {
-                                deferred.resolve();
-                           });
-
-                        });
-
-                        return deferred.promise;
-                    }]
-                }
-            })
-            .when('/register', {
-                templateUrl: 'components/register/partials/register.html',
-                resolve: ['$q', '$rootScope', function ($q, $rootScope) {
-
-                    var deferred = $q.defer();
-
-                    require ([
-                        'components/register/controllers/registerController',
-                        'components/register/services/registerService'
-                    ], function () {
-
-                        $rootScope.$apply(function () {
-                            deferred.resolve();
-                        });
-
-                    });
-
-                    return deferred.promise;
-                }]
-            });
-
-        window.app.components = {
-            controller: $controllerProvider.register,
-            service: $provide.service
-        }
-
-    }
-]);
+}]);

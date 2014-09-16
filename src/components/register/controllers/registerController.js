@@ -1,5 +1,6 @@
 
-app.components.controller('registerController', [
+angular.module('routeResolve')
+.components.controller('registerController', [
     '$scope',
     'registerService',
     function ($scope, registerService) {

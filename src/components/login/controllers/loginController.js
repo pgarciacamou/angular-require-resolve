@@ -1,5 +1,6 @@
 
-app.components.controller('loginController', [
+angular.module('routeResolve')
+.components.controller('loginController', [
     '$scope',
     'loginService',
     function ($scope, loginService) {
